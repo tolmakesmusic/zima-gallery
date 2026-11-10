@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Galerie">
+<title>Galerie</title>
+<link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/static/icon.svg">
+<link rel="stylesheet" href="/static/app.css?v=__VERSION__">
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <button id="back" class="icon-btn hidden" aria-label="Zurück"></button>
+    <div id="actions" class="tb-actions"></div>
+    <div class="titles"><h1 id="title">Galerie</h1><div id="subtitle"></div></div>
+  </header>
+  <main id="view"></main>
+  <div id="selbar" class="selbar hidden" role="toolbar" aria-label="Auswahl"></div>
+  <nav class="tabbar" aria-label="Hauptnavigation">
+    <a href="#/mediathek" data-tab="mediathek"><span class="ti" data-icon="photos"></span><span>Mediathek</span></a>
+    <a href="#/sammlung" data-tab="sammlung"><span class="ti" data-icon="coll"></span><span>Sammlung</span></a>
+    <a href="#/import" data-tab="import"><span class="ti" data-icon="imp"></span><span>Import</span></a>
+    <a href="#/einstellungen" data-tab="einstellungen"><span class="ti" data-icon="gear"></span><span>Einstellungen</span></a>
+  </nav>
+</div>
+
+<div id="lightbox" class="lb hidden" aria-modal="true" role="dialog">
+  <div class="lb-top">
+    <button class="icon-btn" data-lb="close" aria-label="Schließen"></button>
+    <div class="lb-title"><strong id="lb-date"></strong><span id="lb-time"></span></div>
+    <span id="lb-count" class="lb-count"></span>
+  </div>
+  <div class="lb-stage" id="lb-stage"></div>
+  <button class="lb-nav prev" data-lb="prev" aria-label="Vorheriges"></button>
+  <button class="lb-nav next" data-lb="next" aria-label="Nächstes"></button>
+  <aside class="lb-info hidden" id="lb-info"></aside>
+  <div class="lb-bottom">
+    <button class="icon-btn" data-lb="fav" aria-label="Favorit"></button>
+    <button class="icon-btn" data-lb="info" aria-label="Info"></button>
+    <button class="icon-btn" data-lb="download" aria-label="Herunterladen"></button>
+    <button class="icon-btn" data-lb="delete" aria-label="Löschen"></button>
+  </div>
+</div>
+
+<div id="modal-root"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="/static/app.js?v=__VERSION__"></script>
+</body>
+</html>

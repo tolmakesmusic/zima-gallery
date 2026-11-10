@@ -1,0 +1,53 @@
+# Galerie für ZimaOS
+# Import in ZimaOS: App Store -> "+" (Benutzerdefinierte App installieren) -> Import -> diese Datei einfügen.
+# Fotos:     /DATA/Gallery                (bleibt bei Updates erhalten)
+# App-Daten: /DATA/AppData/zima-gallery   (Datenbank, Vorschaubilder, Logos)
+name: zima-gallery
+services:
+  zima-gallery:
+    image: zima-gallery:latest          # bei GitHub-Build: ghcr.io/<dein-name>/zima-gallery:latest
+    container_name: zima-gallery
+    restart: unless-stopped
+    ports:
+      - target: 8080
+        published: "8095"
+        protocol: tcp
+    environment:
+      TZ: Europe/Berlin
+      HOST_MEDIA_PATH: /DATA/Gallery
+      HOST_DATA_PATH: /DATA/AppData/zima-gallery
+    volumes:
+      - type: bind
+        source: /DATA/AppData/zima-gallery
+        target: /data
+      - type: bind
+        source: /DATA/Gallery
+        target: /media
+    x-casaos:
+      ports:
+        - container: "8080"
+          description: { en_us: Web UI, de_de: Weboberfläche }
+      volumes:
+        - container: /data
+          description: { en_us: App data, de_de: App-Daten (Datenbank, Vorschaubilder, Logos) }
+        - container: /media
+          description: { en_us: Photos and videos, de_de: Fotos und Videos }
+x-casaos:
+  architectures: [amd64, arm64]
+  main: zima-gallery
+  author: self
+  developer: self
+  category: Gallery
+  description:
+    en_us: Photo and video gallery with albums, favorites, memories and import labels.
+    de_de: Foto- und Videogalerie mit Alben, Favoriten, Rückblick und Import-Labels.
+  tagline:
+    en_us: Your photos, like on your iPhone.
+    de_de: Deine Fotos – wie auf dem iPhone.
+  title:
+    en_us: Galerie
+    de_de: Galerie
+  icon: https://raw.githubusercontent.com/DEIN-NAME/zima-gallery/main/app/static/icon.png
+  index: /
+  port_map: "8095"
+  scheme: http
